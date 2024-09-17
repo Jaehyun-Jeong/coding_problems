@@ -9,7 +9,7 @@ int jump(int* nums, int numsSize){
 
     int i = numsSize - 1;
 
-    while(nums[i] >= numsSize - i - 1 && i >= 0){
+    while(i >= 0 && nums[i] >= numsSize - i - 1){
         i--;
     }
 
