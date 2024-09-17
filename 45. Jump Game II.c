@@ -3,8 +3,10 @@
 
 int jump(int* nums, int numsSize){
 
-    if(numsSize <= 1)
+    if(numsSize == 1)
         return 0;
+    else if(numsSize == 0)
+        return 1;
 
     int i = numsSize - 1;
 
@@ -19,8 +21,10 @@ int jump(int* nums, int numsSize){
 int main(void){
 
     // int nums[100] = {5,6,4,4,6,9,4,4,7,4,4,8,2,6,8,1,5,9,6,5,2,7,9,7,9,6,9,4,1,6,8,8,4,4,2,0,3,8,5}, numsSize = 34;
-    int nums[] = {2,3,1,1,4};
-    int numsSize = 5;
+    //int nums[] = {1,2,3};
+
+    int nums[] = {0};
+    int numsSize = 1;
 
     printf("%d\n", jump(nums, numsSize));
 
