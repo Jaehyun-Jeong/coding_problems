@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 
-int step(int* minSteps, int* nums, int startIdx){
+int jump(int* nums, int startIdx){
 
     int i = startIdx - 1;
 
@@ -12,18 +12,8 @@ int step(int* minSteps, int* nums, int startIdx){
             i--;
     }
 
-    *minSteps += 1;
+    return 1 + jump(nums, i);
 
-    step(minSteps, nums, i);
-}
-
-int jump(int* nums, int numSize){
-
-    int minSteps = 0;
-
-    step(&minSteps, nums, numSize-1);
-
-    return minSteps;
 }
 
 int main(void){
