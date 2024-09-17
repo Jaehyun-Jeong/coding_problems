@@ -3,14 +3,14 @@
 
 int jump(int* nums, int numsSize){
 
+    if(numsSize == 0)
+        return 0;
+
     int i = numsSize - 1;
 
     while(nums[i] >= numsSize - i - 1 && i > 0){
         i--;
     }
-
-    if(i <= 0)
-        return 1;
 
     return 1 + jump(nums, i);
 }
