@@ -1,19 +1,18 @@
 #include <stdio.h>
 
 
-int jump(int* nums, int startIdx){
+int jump(int* nums, int numsSize){
 
-    int i = startIdx - 1;
+    int i = numsSize - 1;
 
-    while(nums[i] >= startIdx - i){
-        if(i == 0)
-            return 0;
-        else
-            i--;
+    while(nums[i] >= numsSize - i && i > 0){
+        i--;
     }
 
-    return 1 + jump(nums, i);
+    if(i <= 0)
+        return 0;
 
+    return 1 + jump(nums, i);
 }
 
 int main(void){
