@@ -3,9 +3,9 @@
 
 int jump(int* nums, int numsSize){
 
-    int i = numsSize;
+    int i = numsSize - 1;
 
-    while(nums[i - 1] >= numsSize - i && i > 0){
+    while(nums[i] >= numsSize - i - 1 && i > 0){
         i--;
     }
 
