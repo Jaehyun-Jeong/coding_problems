@@ -3,7 +3,7 @@
 
 int jump(int* nums, int numsSize){
 
-    if(numsSize == 0)
+    if(numsSize <= 1)
         return 0;
 
     int i = numsSize - 1;
