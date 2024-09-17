@@ -1,34 +1,34 @@
 #include <stdio.h>
 
 
-void step(int* minSteps, int steps, int idx, int* nums, int numSize){
+int step(int* minSteps, int* nums, int startIdx){
 
-    int i, num;
+    int i = startIdx - 1;
 
-    if(numSize-1 <= idx){
-        if(*minSteps == -1 || *minSteps > steps)
-            *minSteps = steps;
+    while(nums[i] >= startIdx - i){
+        if(i == 0)
+            return 0;
+        else
+            i--;
     }
-    else{
-        num = nums[idx];
-        for(i = 1; i <= num; i++){
-            step(minSteps, steps+1, idx+i, nums, numSize);
-        }
-    }
+
+    *minSteps += 1;
+
+    step(minSteps, nums, i);
 }
 
 int jump(int* nums, int numSize){
 
-    int minSteps = -1;
+    int minSteps = 0;
 
-    step(&minSteps, 0, 0, nums, numSize);
+    step(&minSteps, nums, numSize-1);
 
     return minSteps;
 }
 
 int main(void){
 
-    int nums[10] = {2, 3, 1, 1, 4}, numSize = 5;
+    int nums[100] = {5,6,4,4,6,9,4,4,7,4,4,8,2,6,8,1,5,9,6,5,2,7,9,7,9,6,9,4,1,6,8,8,4,4,2,0,3,8,5}, numSize = 34;
 
     printf("%d\n", jump(nums, numSize));
 
