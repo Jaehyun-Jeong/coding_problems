@@ -28,9 +28,9 @@ int main(void){
 
     char* s;
 
-    char s1[] = "leet**cod*e";
-    s = removeStars(s1);
-    printf("%s\n", s);
+    char* s1 = "leet**cod*e";
+    removeStars(s1);
+    printf("%s\n", s1);
     // "lecoe"
 
     char s2[] = "erase*****";
