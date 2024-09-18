@@ -3,12 +3,13 @@
 
 char* removeStars(char* s) {
 
-    int i = 0, c, ansCounter = 0;
-    char ans[100001];
+    int i = 0, c, counter = 0;
 
     while(s[i]){
         i++;
     }
+    counter = i;
+    s[counter--] = '\0';
 
     while(i--){
         if(s[i] == '*')
@@ -16,32 +17,30 @@ char* removeStars(char* s) {
         else if(c > 0)
             c--;
         else
-            ans[ansCounter++] = s[i];
+            s[counter--] = s[i];
     }
-    ans[ansCounter] = '\0';
-
-    i = 0;
-    while(ansCounter--)
-        s[i++] = ans[ansCounter];
-    s[i] = '\0';
+    s = &s[counter+1];
 
     return s;
 }
 
 int main(void){
 
-    char* p;
+    char* s;
 
     char s1[] = "leet**cod*e";
-    printf("%s\n", removeStars(s1));
+    s = removeStars(s1);
+    printf("%s\n", s);
     // "lecoe"
 
     char s2[] = "erase*****";
-    printf("%s\n", removeStars(s2));
+    s = removeStars(s2);
+    printf("%s\n", s);
     // ""
 
     char s3[] = "leet**cod*e";
-    printf("%s\n", removeStars(s3));
+    s = removeStars(s3);
+    printf("%s\n", s);
     // "lecoe"
 
     return 0;
