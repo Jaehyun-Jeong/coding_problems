@@ -5,7 +5,6 @@ char* removeStars(char* s) {
 
     int i = 0, c, ansCounter;
     char ans[100001];
-    char* ptrAns;
 
     while(s[i]){
         i++;
@@ -23,9 +22,9 @@ char* removeStars(char* s) {
             ans[ansCounter--] = s[i];
     }
 
-    ptrAns = &ans[ansCounter+1];
+    s = &ans[ansCounter+1];
 
-    return ptrAns;
+    return s;
 }
 
 int main(void){
