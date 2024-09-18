@@ -1,24 +1,25 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 
 char* removeStars(char* s) {
 
-    int i = 0, c = 0, counter = 0;
+    int i = 0, c = 0;
     char* ans;
     ans = (char*)malloc((100001)*sizeof(char));
 
-    while(s[i]){
+    for(i = 0; i < strlen(s); i++){
         if(s[i] != '*'){
-            if(counter >= 0)
-                ans[counter] = s[i];
-            counter++;
-        } else
-            counter--;
-        i++;
+            if(c >= 0)
+                ans[c] = s[i];
+            c++;
+        } else {
+            c--;
+        }
     }
-    ans[counter] = '\0';
-    
+    ans[c] = '\0';
+
     return ans;
 }
 
