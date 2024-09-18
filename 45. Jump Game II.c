@@ -1,28 +1,35 @@
 #include <stdio.h>
 
 
-
 int jump(int* nums, int numsSize){
 
-    int i = numsSize - 1;
-    int lastWindow = numsSize - 1;
-
-    if(numsSize == 1){
+    if(numsSize == 1)
         return 0;
-    }
-
-    while(i >= 0){
-        if(nums[i] >= numsSize - i - 1)
-            lastWindow = i;
-        i--;
-    }
-
-    // It ends at nums[0]
-    if(lastWindow == 0){
+    else if(numsSize == 2)
         return 1;
-    } else {
-        return 1 + jump(nums, lastWindow+1);
+
+    int i = 0,
+        j,
+        k = nums[0],
+        l = 0,
+        jumps = 0;
+
+    while(i < numsSize-1){
+
+        j = i + nums[i];
+
+        if(j > k)
+            k = j;
+
+        if(i == l){
+            l = k;
+            jumps++; 
+        }
+
+        i++;
     }
+
+    return jumps;
 }
 
 
