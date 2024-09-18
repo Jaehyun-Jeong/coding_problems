@@ -18,7 +18,11 @@ char* removeStars(char* s) {
             c--;
         }
     }
-    ans[c] = '\0';
+    
+    if(c < 0)
+        ans[0] = '\0';
+    else
+        ans[c] = '\0';
 
     return ans;
 }
