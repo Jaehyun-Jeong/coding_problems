@@ -10,6 +10,7 @@ char* removeStars(char* s) {
     while(s[i]){
         i++;
     }
+
     ansCounter = i;
     ans[ansCounter--] = '\0';
 
@@ -23,6 +24,7 @@ char* removeStars(char* s) {
     }
 
     ptrAns = &ans[ansCounter+1];
+
     return ptrAns;
 }
 
@@ -35,6 +37,10 @@ int main(void){
     char s2[] = "erase*****";
     printf("%s\n", removeStars(s2));
     // ""
+
+    char s3[] = "leet**cod*e";
+    printf("%s\n", removeStars(s3));
+    // "lecoe"
 
     return 0;
 }
