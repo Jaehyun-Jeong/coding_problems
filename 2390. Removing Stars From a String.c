@@ -9,28 +9,16 @@ char* removeStars(char* s) {
     ans = (char*)malloc((100001)*sizeof(char));
 
     while(s[i]){
-        if(s[i] != '*')
+        if(s[i] != '*'){
+            if(counter >= 0)
+                ans[counter] = s[i];
             counter++;
-        else
+        } else
             counter--;
         i++;
     }
+    ans[counter] = '\0';
     
-    if(counter < 0){
-        ans[0] = '\0';
-    } else {
-        ans[counter--] = '\0';
-
-        while(i--){
-            if(s[i] == '*')
-                c++;
-            else if(c > 0)
-                c--;
-            else
-                ans[counter--] = s[i];
-        }
-    }
-
     return ans;
 }
 
