@@ -1,44 +1,54 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 
 char* removeStars(char* s) {
 
-    int i = 0, c, counter = 0;
+    int i = 0, c = 0, counter = 0;
+    char* ans;
+    ans = (char*)malloc((100001)*sizeof(char));
 
     while(s[i]){
+        if(s[i] != '*')
+            counter++;
+        else
+            counter--;
         i++;
     }
-    counter = i;
-    s[counter--] = '\0';
+    
+    if(counter < 0){
+        ans[0] = '\0';
+    } else {
+        ans[counter--] = '\0';
 
-    while(i--){
-        if(s[i] == '*')
-            c++;
-        else if(c > 0)
-            c--;
-        else
-            s[counter--] = s[i];
+        while(i--){
+            if(s[i] == '*')
+                c++;
+            else if(c > 0)
+                c--;
+            else
+                ans[counter--] = s[i];
+        }
     }
-    s = &s[counter+1];
 
-    return s;
+    return ans;
 }
 
 int main(void){
 
     char* s;
 
-    char* s1 = "leet**cod*e";
-    removeStars(s1);
-    printf("%s\n", s1);
+    char s1[] = "leet**cod*e";
+    s = removeStars(s1);
+    printf("%s\n", s);
     // "lecoe"
 
-    char s2[] = "erase*****";
+    char* s2 = "erase*****";
     s = removeStars(s2);
     printf("%s\n", s);
     // ""
 
-    char s3[] = "leet**cod*e";
+    char* s3 = "leet**cod*e";
     s = removeStars(s3);
     printf("%s\n", s);
     // "lecoe"
