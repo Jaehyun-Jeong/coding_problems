@@ -21,7 +21,7 @@ int* asteroidCollision(int* asteroids, int asteroidsSize, int* returnSize) {
             } else {
                 ans[c++] = asteroids[i++];
             }
-        } else {
+        } else if(i < asteroidsSize) {
             ans[c++] = asteroids[i++];
         }
     }
@@ -58,6 +58,13 @@ int main(void){
     }
     printf("\n");
 
+    int asteroids04[] = {1, -1, 1, -2}, asteroids04Size = 4;
+    ans = asteroidCollision(asteroids04, asteroids04Size, ptrReturnSize);
+
+    for(int i = 0; i < returnSize; i++){
+        printf("%d ", ans[i]);
+    }
+    printf("\n");
 
     return 0;
 }
