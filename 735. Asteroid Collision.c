@@ -2,23 +2,29 @@
 #include <stdlib.h>
 
 int* asteroidCollision(int* asteroids, int asteroidsSize, int* returnSize) {
-    int i = asteroidsSize-1, c = asteroidsSize;
+    int i = 0, c = 0;
     int* ans;
+    ans = (int*)malloc(10000*sizeof(int));
 
-    while(i > 0){
-        if(asteroids[i] < 0 && asteroids[i-1] > 0){
-            c--;
-            if(asteroids[i] == -asteroids[i-1]){
-                i--;
+    while(i < asteroidsSize){
+        if(c == 0)
+            ans[c++] = asteroids[i++];
+
+        if(asteroids[i] < 0 && ans[c-1] > 0){
+            if(-asteroids[i] == ans[c-1]){
                 c--;
-            } else
-                asteroids[i-1] = abs(asteroids[i-1]) < abs(asteroids[i]) ? asteroids[i] : asteroids[i-1];
+                i++;
+            } else if(-asteroids[i] < ans[c-1]){
+                i++;
+            } else if(-asteroids[i] > ans[c-1]){
+                c--;
+            } else {
+                ans[c++] = asteroids[i++];
+            }
+        } else {
+            ans[c++] = asteroids[i++];
         }
-        i--;
     }
-
-    ans = (int*)malloc((c)*sizeof(int));
-    ans = asteroids;
 
     *returnSize = c;
 
@@ -46,8 +52,6 @@ int main(void){
 
     int asteroids03[] = {8, -8}, asteroids03Size = 2;
     ans = asteroidCollision(asteroids03, asteroids03Size, ptrReturnSize);
-
-    printf("returnSize: %d\n", returnSize);
 
     for(int i = 0; i < returnSize; i++){
         printf("%d ", ans[i]);
