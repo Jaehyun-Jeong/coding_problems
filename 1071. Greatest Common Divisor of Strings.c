@@ -7,8 +7,8 @@ char* gcdOfStrings(char* str1, char* str2) {
     int i, match = 0;
     char* ans, *check1, *check2;
     ans = (char*)malloc(1001*sizeof(char));
-    check1 = (char*)malloc(1001*sizeof(char));
-    check2 = (char*)malloc(1001*sizeof(char));
+    check1 = (char*)malloc(2001*sizeof(char));
+    check2 = (char*)malloc(2001*sizeof(char));
 
     for(i = 0; i < strlen(str1); i++){
         check1[i] = str1[i];
