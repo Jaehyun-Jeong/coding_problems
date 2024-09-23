@@ -5,7 +5,7 @@
 char * mergeAlternately(char * word1, char * word2){
     int word1c = 0, word2c = 0, c = 0;
     char* ans;
-    ans = (char*)malloc(101*sizeof(char));
+    ans = (char*)malloc(201*sizeof(char));
     
     while(word1[word1c] || word2[word2c]){
         if(word1[word1c])
