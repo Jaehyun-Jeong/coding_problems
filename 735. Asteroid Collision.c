@@ -4,7 +4,7 @@
 int* asteroidCollision(int* asteroids, int asteroidsSize, int* returnSize) {
     int i = 0, c = 0;
     int* ans;
-    ans = (int*)malloc(10000*sizeof(int));
+    ans = (int*)malloc(asteroidsSize*sizeof(int));
 
     while(i < asteroidsSize){
         if(c == 0)
