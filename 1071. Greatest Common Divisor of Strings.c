@@ -35,10 +35,10 @@ char* gcdOfStrings(char* str1, char* str2) {
 
     if(strlen(str1) < strlen(str2)){
         ans = &str2[strlen(str1)];
-        gcdOfStrings(str1, ans);
+        return gcdOfStrings(str1, ans);
     } else {
         ans = &str1[strlen(str2)];
-        gcdOfStrings(ans, str2);
+        return gcdOfStrings(ans, str2);
     }
 }
 
