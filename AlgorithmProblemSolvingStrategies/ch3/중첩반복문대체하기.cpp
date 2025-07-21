@@ -9,7 +9,7 @@ void test(int n, int m, vector<int> numbers){
         cout << endl;
     } else {
         for(int i = 1; i <= n - m + 1; ++i){
-            numbers[m-1] = i;
+            numbers[m-1] = n - i;
             test(n-i, m-1, numbers);
         }
     }
