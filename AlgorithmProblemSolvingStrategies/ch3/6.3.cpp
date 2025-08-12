@@ -7,29 +7,18 @@ const int dx[8] = {-1, -1, -1, 1, 1, 1, 0, 0};
 const int dy[8] = {-1, 0, 1, -1, 0, 1, -1, 1};
 
 bool hasWord(int y, int x, const string& word, const vector<vector<char>> board){
-    // 1. if the word has one character, check the character of the position and return
-    // 2. loop hasWord for adjacent 8 positions
 
-    int yLen = board.size();
-    int xLen = board[0].size();
-    bool pass = false;
+    if(!inRange(y, x)) return false;
 
-    if(x >= 0 && x < xLen && y >= 0 && y < yLen){
-        if(word.length() == 1 && board[y][x] == word[0]){
+    if(board[y][x] != word[0]) return false;
+
+    if(word.size() == 1) return true;
+
+    for(int direction = 0; direction < 8; ++direction){
+        int nextY = y + dy[direction], nextX = x + dx[direction];
+        if(hasWord(nextY, nextX, word.substr(1)))
             return true;
-        }
-
-        if(word.length() > 1 && board[y][x] == word[0]){
-            for(int i = 0; i < 8; ++i){
-                if(hasWord(y + dy[i], x + dx[i], word.substr(1), board)){
-                    pass = true;
-                }
-            }
-        }
     }
-    
-    if(pass)
-        return true;
 
     return false;
 }
