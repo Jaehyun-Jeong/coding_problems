@@ -1,0 +1,60 @@
+#include <iostream>
+#include <vector>
+#include <string>
+#include <cmath>
+using namespace std;
+
+
+unsigned int str2Bi(const string a){
+    unsigned int ret = 0;
+
+    for(int i = 0; i < a.size(); ++i){
+        if(a[i] == 'M'){
+            ret += pow(2, a.size() - i - 1);
+        }
+    }
+
+    return ret;
+}
+
+
+unsigned int solve(string members, string fans){
+
+    unsigned int biMembers, tmpFans, ret = 0;
+
+    biMembers = str2Bi(members);
+
+    for(int i = 0; i < fans.size() - members.size() + 1; ++i){
+        tmpFans = str2Bi(fans.substr(i, members.size()));
+        if(!(biMembers & tmpFans))
+            ++ret;
+    }
+
+    return ret;
+}
+
+
+int main(){
+
+    string members = "FFFMMM";
+    string fans = "MMMFFF";
+
+    cout << solve(members, fans) << endl;
+
+    members = "FFFFF";
+    fans = "FFFFFFFFFF";
+
+    cout << solve(members, fans) << endl;
+
+    members = "FFFFM";
+    fans = "FFFFFMMMMF";
+
+    cout << solve(members, fans) << endl;
+
+    members = "MFMFMFFFMMMFMF";
+    fans = "MMFFFFFMFFFMFFFFFFMFFFMFFFFMFMMFFFFFFF";
+
+    cout << solve(members, fans) << endl;
+
+    return 0;
+}
