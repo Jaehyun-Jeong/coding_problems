@@ -42,7 +42,7 @@ int check(const vector<int> plates, int n){
 
 
 int main(){
-    
+
     int n = 7;
     vector<int> plates = {7, 1, 5, 9, 6, 7, 3};
 
