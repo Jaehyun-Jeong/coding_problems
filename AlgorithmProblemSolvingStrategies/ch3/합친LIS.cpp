@@ -4,68 +4,61 @@
 #include <cstring>
 using namespace std;
 
-void printArr(int arr[], int len){
-    for(int i = 0; i < len; ++i)
-        cout << arr[i] << ' ';
+void printArr(vector<int> A){
+    for(int i = 0; i < A.size(); ++i)
+        cout << A[i] << ' ';
     cout << endl;
 }
 
 
-int cache[201];
-int n = 5, m = 3, k;
-int S[200];
-int S1[] = {10, 20, 30, 1, 2};
-int S2[] = {10, 20, 30};
+int cache[101][101];
+int n = 3, m = 3, k;
+int S1[] = {1, 9, 4};
+int S2[] = {3, 4, 7};
 
 
-void merge(int S[200], int s1[100], int s2[100]){
+int length(vector<int> A, vector<int> B){
     int i = 0, j = 0, counter = 0;
-    k = 0;
 
-    while(i < n || j < m){
+    for(int i = 0; i < A.size(); ++i)
+        for(int j = 0; j < B.size(); ++j)
+            if(A[i] == B[j])
+                ++counter;
 
-        if(i >= n && j < m)
-            S[counter++] = s2[j++];
-        else if((j >= m && i < n) || (s1[i] < s2[j]))
-            S[counter++] = s1[i++];
-        else{
-            if(s1[i] == s2[j]){
-                ++i;
-                --k;
-            }
-            S[counter++] = s2[j++];
-        }
-    }
-
-    k += n + m;
+    return A.size() + B.size() - counter;
 }
 
 
-int lis3(int start, int S[], int len, int& lis[]){
+int lis3(int start1, int start2, vector<int> A, vector<int> B){
 
-    int& ret = cache[start+1];
+    int& ret = cache[start1+1][start2+1];
+
     if(ret != -1) return ret;
 
     ret = 1;
-    for(int next = start+1; next < len; ++next)
-        if(start == -1 || S[start] < S[next]){
-            lis[ret-1] = S[next];
-            ret = max(ret, lis3(next, S, len, lis) + 1);
+    for(int i = start1+1; i < n; ++i)
+        if(start1 == -1 || S1[start1] < S1[i]){
+            A.push_back(S1[i]);
+            B.clear();
+            for(int j = start2+1; j < m; ++j){
+                if(start2 == -1 || S2[start2] < S2[j]){
+                    B.push_back(S2[j]);
+                    ret = max(ret, lis3(i, j, A, B) + 1);
+                }
+            }
         }
 
-    return ret;
+    return length(A, B);
 }
-
-
-int solve();
 
 
 int main(){
 
-    memset(cache, -1, sizeof(cache));
-    cache[0] = -987654321;
+    vector<int> A, B;
 
-    cout << lis3(0) << endl;;
+    memset(cache, -1, sizeof(cache));
+
+    cout << lis3(-1, -1, A, B) << endl;;
 
     return 0;
 }
