@@ -22,8 +22,27 @@ void precalc(){
 }
 
 int minError(int lo, int hi){
+
     int sum = pSum[hi] - (lo == 0 ? 0 : pSum[lo-1]);
     int sqSum = pSqSum[hi] - (lo == 0 ? 0 : pSqSum[lo-1]);
+    int m = int(0.5 + (double)sum / (hi - lo + 1));
+    int ret = sqSum - 2 * m * sum + m * m * (hi - lo + 1);
+
+    return ret;
+}
+
+int cache[101][11];
+int quantize(int from, int parts){
+    if(from == n) return n;
+    if(parts == 0) return INF;
+    int& ret = cache[from][parts];
+    if(ret != -1) return ret;
+    ret = INF;
+
+    for(int partSize = 1; from + partSize <= n; ++partSize)
+        ret = min(ret, minError(from, from + partSize - 1) + quantize(from + partSize, parts - 1));
+
+    return ret;
 }
 
 
