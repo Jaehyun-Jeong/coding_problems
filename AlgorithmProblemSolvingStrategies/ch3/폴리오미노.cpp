@@ -19,10 +19,12 @@ int polyomino(int start, int n){
         return ret;
 
     ret = 0;
-    for(int i = 1; i <= n; ++i)
+    for(int i = 1; i <= n; ++i){
         ret += (start + i - 1) * polyomino(i, n - i);
+        ret = ret % MOD;
+    }
 
-    return ret % MOD;
+    return ret;
 }
 
 
@@ -32,6 +34,7 @@ int solve(int n){
     int ret = 0;
     for(int i = 1; i <= n; ++i)
         ret += polyomino(i, n - i);
+
     ret = ret % MOD;
 
     return ret;

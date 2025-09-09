@@ -6,17 +6,26 @@
 using namespace std;
 
 
-int n, m;
-int cache[MAX_N][2*MAX_N+1];
+const int MOD = 10*1000*1000;
+int cache[101][101];
 
-int climb(int days, int climbed){
-    if(days == m) return climbed >= n ? 1 : 0;
-    int& ret = cache[days][climbed];
+int poly(int n, int first){
+    if(n == first) return 1;
+
+    int& ret = cache[n][first];
     if(ret != -1) return ret;
+    
+    ret = 0;
+    for(int second = 1; second <= n-first; ++second){
+        int add = second + first - 1;
+        add *= poly(n - first, second);
+        add %= MOD;
+        add += add;
+        ret %= MOD;
+    }
 
-    return ret = climb(days+1, climbed+1) + climb(days+1, climbed+2);
+    return ret;
 }
-
 
 
 int main(){
