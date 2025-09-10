@@ -46,13 +46,13 @@ vector<vector<double>> matMul(vector<vector<double>> A, vector<vector<double>> B
 void AdjacencyToProbability(vector<vector<double>>& A){
     int numRow = A.size(), numCol = A[0].size(), count;
     
-    for(int col = 0; col < numCol; ++col){
+    for(int row = 0; row < numRow; ++row){
         count = 0;
-        for(int row = 0; row < numRow; ++row){
+        for(int col = 0; col < numCol; ++col){
             if(A[row][col] == 1.0)
                 ++count;
         }
-        for(int row = 0; row < numRow; ++row){
+        for(int col = 0; col < numCol; ++col){
             if(A[row][col] == 1.0)
                 A[row][col] = 1.0 / count;
         }
@@ -66,7 +66,7 @@ void solve(int N, int D, int P, vector<vector<double>> A){
     AdjacencyToProbability(A);
     tmp = A;
 
-    while(D--){
+    while(--D){
         printVec(A);
         A = matMul(A, tmp);
     }
