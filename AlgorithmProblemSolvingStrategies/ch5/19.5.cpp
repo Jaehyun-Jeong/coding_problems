@@ -1,0 +1,45 @@
+#include <iostream>
+#include <vector>
+#include <string>
+#include <cstring>
+#include <cstdlib>
+#include <stack>
+using namespace std;
+
+
+// code 19.6
+struct RNG {
+    unsigned seed;
+    RNG() : seed(1983) {}  // Initialization
+    unsigned next() {
+        unsigned ret = seed;
+        seed = ((seed * 214013u) + 2531011u);  // u behind the number means unsigned
+        return ret % 10000 + 1;
+    }
+};
+
+
+int countRanges(int k, int n){
+    RNG rng;
+    queue<int> range;
+    int ret = 0, rangeSum = 0;
+    for(int i = 0; i < n; ++i){
+        int newSignal = rng.next();
+        rangeSum += newSignal;
+        range.push(newSignal);
+
+        while(rangeSum > k){
+            rangeSum -= range.front();
+            range.pop();
+        }
+
+        if(rangeSum == k) ++ret;
+    }
+
+    return ret;
+}
+
+
+int main(){
+    return 0;
+}
